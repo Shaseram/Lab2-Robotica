@@ -65,3 +65,8 @@ El Laboratorio 2 se enfoca en ampliar las capacidades del robot móvil desarroll
 ### Análisis de mejoras
 
 # Códigos utilizados
+
+- movcolor.ino -> Código encargado de la navegación por detección de colores.
+- hcsr04.ino -> Código que prueba el sensor hcsr04 y su capacidad de detección.
+- rgb.ino -> Código que prueba el sensor rgb.
+- movobstaculos.ino -> Código que maneja el movimiento y navegación con detección de obstaculos con el sensor hcsr04.
