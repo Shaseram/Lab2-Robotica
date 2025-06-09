@@ -63,12 +63,6 @@ void setup() {
 
 // --- LOOP: CICLO PRINCIPAL DEL ROBOT ---
 void loop() {
-  // 1. CHEQUEO DE SEGURIDAD PRIMERO: ¿Hay un obstáculo?
-  int distancia = leerDistancia();
-  if (distancia > 0 && distancia < UMBRAL_OBSTACULO) {
-    evadirObstaculo();
-  } else {
-    // 2. SI NO HAY OBSTÁCULOS, NAVEGAR POR COLOR
     uint16_t r, g, b, c;
     tcs.getRawData(&r, &g, &b, &c);
 
@@ -97,7 +91,7 @@ void loop() {
       Serial.println("Camino no definido -> DETENERSE");
       detenerse();
     }
-  }
+  
 
   delay(100);
 }
@@ -143,29 +137,4 @@ void girarIzquierda() {
   digitalWrite(MOTOR_DER_IN4, LOW);
   analogWrite(MOTOR_IZQ_ENA, VELOCIDAD_GIRO);
   analogWrite(MOTOR_DER_ENB, VELOCIDAD_GIRO);
-}
-
-
-// --- FUNCIONES DE SENSORES Y COMPORTAMIENTO ---
-
-int leerDistancia() {
-  digitalWrite(TRIG_PIN, LOW);
-  delayMicroseconds(2);
-  digitalWrite(TRIG_PIN, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(TRIG_PIN, LOW);
-  long duracion = pulseIn(ECHO_PIN, HIGH);
-  return duracion * 0.0343 / 2;
-}
-
-void evadirObstaculo() {
-  Serial.println("¡OBSTÁCULO! Iniciando evasión...");
-  detenerse();
-  delay(300);
-  retroceder();
-  delay(700);
-  girarDerecha();
-  delay(700);
-  detenerse();
-  delay(300);
 }
